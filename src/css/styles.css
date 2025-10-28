@@ -9,32 +9,134 @@
 @import url('./base.css');
 
 
-/* базові */
-body { font-family: Arial, sans-serif; margin: 0; background:#f5f7fb; color:#222; }
-.container { max-width: 1000px; margin: 40px auto; padding: 0 16px; }
+/* Reset / common */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* форма */
-.form { display:flex; gap:8px; margin-bottom:20px; }
-.form input { flex:1; padding:8px 12px; border-radius:4px; border:1px solid #ccc; }
-.form button { padding:8px 14px; border:none; background:#4b5cfa; color:#fff; border-radius:6px; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f7fb;
+  color: #222;
+  line-height: 1.4;
+}
 
-/* loader */
-.loader-wrapper { display:none; justify-content:center; align-items:center; margin:20px 0; }
-.loader-wrapper.is-visible { display:flex; }
-/* простий css loader (коло) */
+.container {
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* ========== FORM ========== */
+.form {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.form input {
+  flex: 1;
+  max-width: 420px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+.form button {
+  padding: 10px 16px;
+  border: none;
+  background: #4b5cfa;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.form button:hover { background: #3a4ce0; }
+
+/* ========== LOADER ========== */
+.loader-wrapper {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+.loader-wrapper.is-visible { display: flex; }
 .loader {
-  width:48px; height:48px; border-radius:50%;
-  border:5px solid rgba(75,92,250,0.15);
-  border-top-color:#4b5cfa;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 5px solid rgba(75,92,250,0.15);
+  border-top-color: #4b5cfa;
   animation: spin 1s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* gallery */
-.gallery { list-style:none; padding:0; display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:16px; }
-.gallery-item { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
-.gallery-image { display:block; width:100%; height:160px; object-fit:cover; }
+/* ========== GALLERY ========== */
+/* IMPORTANT: display:grid is required for columns */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-/* info */
-.info { display:flex; justify-content:space-around; padding:8px 10px; font-size:13px; color:#666; }
-.info-item { margin:0; }
+/* if some external CSS overrides display, uncomment below for debugging */
+/* .gallery { display: grid !important; } */
+
+.gallery-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column; /* дуже важливо! */
+}
+
+.gallery-item:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+
+.gallery-link { display: block; width: 100%; height: 100%; }
+.gallery-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+/* info panel below image */
+.info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #555;
+  border-top: 1px solid #eee;
+}
+.info-item {
+  margin: 2px 0;
+  font-size: 12px;
+}
+
+.info-item b {
+  color: #222;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* ========== RESPONSIVE ========== */
+/* 4 columns for slightly smaller desktops */
+@media (max-width: 1200px) {
+  .gallery { grid-template-columns: repeat(4, 1fr); }
+}
+/* 3 columns for tablets */
+@media (max-width: 992px) {
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+}
+/* 2 columns for phones */
+@media (max-width: 640px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .gallery-image { height: 160px; }
+}
+/* 1 column for very small devices */
+@media (max-width: 420px) {
+  .gallery { grid-template-columns: 1fr; }
+  .gallery-image { height: 140px; }
+}
