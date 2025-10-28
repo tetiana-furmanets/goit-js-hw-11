@@ -4,10 +4,10 @@ import{a as p,S as y,i as n}from"./assets/vendor-BNibzuFn.js";(function(){const 
           <img class="gallery-image" src="${s}" alt="${t}" loading="lazy" />
         </a>
         <div class="info">
-          <p class="info-item"><b>Likes</b>${i}</p>
-          <p class="info-item"><b>Views</b>${m}</p>
-          <p class="info-item"><b>Comments</b>${d}</p>
-          <p class="info-item"><b>Downloads</b>${g}</p>
+          <p class="info-item"><b>Likes:</b>${i}</p>
+          <p class="info-item"><b>Views:</b>${m}</p>
+          <p class="info-item"><b>Comments:</b>${d}</p>
+          <p class="info-item"><b>Downloads:</b>${g}</p>
         </div>
       </li>
       `}).join("");u.insertAdjacentHTML("beforeend",r),S.refresh()}function P(){u.innerHTML=""}function $(){c&&c.classList.add("is-visible")}function l(){c&&c.classList.remove("is-visible")}const f=document.querySelector(".form");f.addEventListener("submit",q);async function q(o){o.preventDefault();const a=f.elements["search-text"].value.trim();if(!a){n.warning({title:"Warning",message:"Please enter a search query"});return}P(),$();try{const s=await w(a),{hits:e,totalHits:t}=s;if(!e||e.length===0){n.info({title:"No results",message:"Sorry, there are no images matching your search query. Please try again!"}),l();return}v(e),n.success({title:"Found",message:`Found ${t} images. Showing ${e.length} results.`})}catch(s){console.error(s),n.error({title:"Error",message:"Something went wrong when fetching images. Please try again later."})}finally{l()}}
